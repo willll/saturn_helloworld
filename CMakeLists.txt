@@ -37,9 +37,19 @@ set(TARGET_NAME helloworld)
 
 add_compile_definitions(MODEL_S _SH)
 
+cmake_path(NORMAL_PATH CMAKE_SOURCE_DIR OUTPUT_VARIABLE PROJECT_ROOT_NORMALIZED)
+
+add_compile_options(
+   "$<$<COMPILE_LANGUAGE:C>:${c_flags}>"
+   "$<$<COMPILE_LANGUAGE:C>:-ffile-prefix-map=${PROJECT_ROOT_NORMALIZED}=.>"
+   "$<$<CONFIG:DEBUG>:-g>"
+   "$<$<CONFIG:RELEASE>:-Os>"
+)
+
 add_executable( ${TARGET_NAME}.elf ${SOURCES} )
 
-target_include_directories(${TARGET_NAME}.elf PUBLIC . ${SEGALIB}/include
+target_include_directories(${TARGET_NAME}.elf PUBLIC
+    ${SEGALIB}/include
     ${PROJECT_SOURCE_DIR}
     ${PROJECT_SOURCE_DIR}/src/smpclib)
 
@@ -48,7 +58,7 @@ target_compile_options(${TARGET_NAME}.elf PUBLIC $<$<COMPILE_LANGUAGE:C>:${c_fla
 
 target_link_options(${TARGET_NAME}.elf PUBLIC
     "SHELL:-Xlinker -Map -Xlinker ${TARGET_NAME}.map"
-    "SHELL:-Xlinker --strip-debug"
+    "$<$<CONFIG:RELEASE>:SHELL:-Xlinker --strip-debug>"
     "SHELL:-m2 -nostartfiles"
     "SHELL:-T${SATURN_COMMON}/Saturn.lnk"
     "SHELL:-Xlinker -z -Xlinker muldefs"
@@ -71,5 +81,18 @@ add_custom_command(OUTPUT IP.BIN
                   ARGS -v -o ${CMAKE_CURRENT_BINARY_DIR}/IP.BIN
                         -t ${TARGET_NAME} -p 2 )
 
+message (${CMAKE_CURRENT_SOURCE_DIR})
+
 include(${SATURN_CMAKE}/install.cmake)
 include(${SATURN_CMAKE}/create_cd.cmake)
+
+if(CMAKE_BUILD_TYPE MATCHES "Debug")
+  install(TARGETS ${TARGET_NAME}.elf
+          LIBRARY
+            COMPONENT Runtime
+            NAMELINK_COMPONENT Development
+          ARCHIVE
+            COMPONENT Development
+            DESTINATION lib/static )
+          #PUBLIC_HEADER DESTINATION ${INSTALL_DESTINATION}/${TARGET_PATH}/src/include  )
+endif()
