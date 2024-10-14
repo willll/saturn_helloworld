@@ -61,6 +61,7 @@ target_link_options(${TARGET_NAME}.elf PUBLIC
     "$<$<CONFIG:RELEASE>:SHELL:-Xlinker --strip-debug>"
     "SHELL:-m2 -nostartfiles"
     "SHELL:-T${SATURN_COMMON}/Saturn.lnk"
+    "SHELL: --specs=nosys.specs"
     "SHELL:-Xlinker -z -Xlinker muldefs"
 )
 

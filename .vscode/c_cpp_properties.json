@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Saturn Mandelbrot",
+            "includePath": [
+            ],
+            "cStandard": "c23",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "gcc-x86",
+            "defines": [
+            ]
+        }
+    ],
+    "version": 4
+}
