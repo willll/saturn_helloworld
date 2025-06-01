@@ -33,7 +33,7 @@ int main()
     DBG_ClearScreen();
     DBG_DisplayOn();
     DBG_Printf("Hello World !\n");
-    for(;;) {
+    for(int i = 0;; i++) {
 
     }
 

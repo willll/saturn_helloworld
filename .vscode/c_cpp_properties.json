@@ -2,13 +2,11 @@
     "configurations": [
         {
             "name": "Saturn Mandelbrot",
-            "includePath": [
-            ],
+            "includePath": [],
             "cStandard": "c23",
             "cppStandard": "c++23",
-            "intelliSenseMode": "gcc-x86",
-            "defines": [
-            ]
+            "intelliSenseMode": "linux-gcc-x64",
+            "defines": []
         }
     ],
     "version": 4

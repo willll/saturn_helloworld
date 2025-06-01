@@ -23,6 +23,25 @@
             }
         },
         {
+            "label": "Compile [DEBUG]",
+            "type": "shell",
+            "command": "ssh root@127.0.0.1 -p 2222 \"mkdir -p /saturn/build && \
+                        cd /saturn/build && rm -rf * && \
+                        cmake -DCMAKE_TOOLCHAIN_FILE=\\$SATURN_CMAKE/sega_saturn.cmake -DCMAKE_INSTALL_PREFIX=/saturn/ -DCMAKE_BUILD_TYPE=Debug.. && \
+                        make all && \
+                        make install && \
+                        chmod 777 -R /saturn/{build,helloworld}/\"",
+            "problemMatcher": [],
+            "presentation": {
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Clean",
             "type": "shell",
             "command": "ssh root@127.0.0.1 -p 2222 \"rm -rf /saturn/build/* && rm -rf /saturn/helloworld/*\"",
@@ -53,7 +72,7 @@
         {
             "label": "Run with Mednafen",
             "type": "shell",
-            "command": "mednafen ${workspaceFolder}/helloworld/helloworld.cue",
+            "command": "/home/will/tmp/mednafenSSDev/build/Mednafen ${workspaceFolder}/helloworld/helloworld.cue",
             "problemMatcher": [],
             "presentation": {
                 "showReuseMessage": false,
@@ -85,6 +104,26 @@
             }
         },
         {
+            "label": "Compile Docker [DEBUG]",
+            "type": "shell",
+            "command": "docker run -it -p 2222:22 --rm -v $(pwd):/saturn saturn-docker:latest /bin/sh -c \"mkdir -p /saturn/build && \
+                        cd /saturn/build && rm -rf * && \
+                        cmake -DCMAKE_TOOLCHAIN_FILE=\\$SATURN_CMAKE/sega_saturn.cmake -DCMAKE_INSTALL_PREFIX=/saturn/ -DCMAKE_BUILD_TYPE=Debug .. && \
+                        make all && \
+                        make install && \
+                        chmod 777 -R /saturn/build/ && \
+                        chmod 777 -R /saturn/helloworld/ \"",
+            "problemMatcher": [],
+            "presentation": {
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Clean Docker",
             "type": "shell",
             "command": "docker run -it -p 2222:22 --rm -v $(pwd):/saturn saturn-docker:latest /bin/sh -c \
@@ -98,6 +137,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
+        }
     ]
 }
