@@ -33,8 +33,12 @@ int main()
     DBG_ClearScreen();
     DBG_DisplayOn();
     DBG_Printf("Hello World !\n");
-    for(int i = 0;; i++) {
 
+    for(int i = 0;; i++) {
+        if (PadData1 & PAD_S) {
+            DBG_Printf("Exit !\n");
+            break;
+        }
     }
 
     return 0;

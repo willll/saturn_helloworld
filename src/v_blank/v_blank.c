@@ -1,11 +1,11 @@
 /*----------------------------------------------------------------------------
- *  V_Blank.c -- V-BlankŠ„‚è‚İˆ—“àƒ‹[ƒ`ƒ“ƒTƒ“ƒvƒ‹
+ *  V_Blank.c -- V-Blankï¿½ï¿½ï¿½èï¿½İï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½
  *  Copyright(c) 1994 SEGA
  *  Written by K.M on 1994-05-16 Ver.1.00
  *  Updated by K.M on 1994-09-21 Ver.1.00
  *
- *  UsrVblankStart()	FV-BlankŠJnŠ„‚è‚İˆ—ƒTƒ“ƒvƒ‹
- *  UsrVblankEnd()	FV-BlankI—¹Š„‚è‚İˆ—ƒTƒ“ƒvƒ‹
+ *  UsrVblankStart()	ï¿½FV-Blankï¿½Jï¿½nï¿½ï¿½ï¿½èï¿½İï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½
+ *  UsrVblankEnd()	ï¿½FV-Blankï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½èï¿½İï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½
  *
  *----------------------------------------------------------------------------
  */
@@ -19,7 +19,7 @@ volatile trigger_t	PadData1  = 0x0000;
 volatile trigger_t	PadData1E = 0x0000;
 volatile trigger_t	PadData2  = 0x0000;
 volatile trigger_t	PadData2E = 0x0000;
-//SysPort	*__port = NULL;
+SysPort	*__port = NULL;
 
 Uint32	PadWorkArea[7];
 
@@ -30,7 +30,7 @@ void	UsrVblankIn( void ){
 
 void   UsrVblankStart(void)
 {
-	/* ƒOƒ‰ƒtƒBƒbƒNƒ‰ƒCƒuƒ‰ƒŠ‚ğg—p‚·‚éˆ×‚É‚ÍÀs‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢ */
+	/* ï¿½Oï¿½ï¿½ï¿½tï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½×‚É‚Íï¿½ï¿½sï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î‚È‚ï¿½È‚ï¿½ */
 	SCL_VblankStart();
 }
 
@@ -39,10 +39,10 @@ void   UsrVblankEnd(void)
 {
 	PerDgtInfo	*pad;
 
-	/* ƒOƒ‰ƒtƒBƒbƒNƒ‰ƒCƒuƒ‰ƒŠ‚ğg—p‚·‚éˆ×‚É‚ÍÀs‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢ */
+	/* ï¿½Oï¿½ï¿½ï¿½tï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½×‚É‚Íï¿½ï¿½sï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î‚È‚ï¿½È‚ï¿½ */
 	SCL_VblankEnd();
 
-	/* ƒpƒbƒhƒf[ƒ^æ“¾ */
+	/* ï¿½pï¿½bï¿½hï¿½fï¿½[ï¿½^ï¿½æ“¾ */
 
 	PER_GetPer((PerGetPer **)&pad);
 	if( pad != NULL ){
@@ -54,7 +54,7 @@ void   UsrVblankEnd(void)
 
 }
 
-/*void   UsrVblankOut( void ){
+void   UsrVblankOut( void ){
 	SCL_VblankEnd();
 	
 	if( __port != NULL ){
@@ -84,5 +84,5 @@ void   UsrVblankEnd(void)
 			PadData2 = PadData2E = 0;
 		}
 	}
-}*/
+}
 

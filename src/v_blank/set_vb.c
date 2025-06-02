@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------
- *  Set_VB.c -- V-BlankŠ„‚è‚İƒ‹[ƒ`ƒ“‚Ì“o˜^
+ *  Set_VB.c -- V-Blankï¿½ï¿½ï¿½èï¿½İƒï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½Ì“oï¿½^
  *  Copyright(c) 1994 SEGA
  *  Written by K.M on 1994-05-16 Ver.0.90
  *  Updated by K.M on 1994-10-04 Ver.1.02
@@ -12,6 +12,7 @@
 
 extern	void  UsrVblankStart(void);
 extern	void  UsrVblankEnd(void);
+extern	void  UsrVblankOut(void);
 
 extern	Uint32	PadWorkArea[7];
 
@@ -21,7 +22,7 @@ void   CheckVblankEnd(void);
 
 void SetVblank(void)
 {
-	/* V_Blank Out Š„‚è‚İ‚ğ‘Ò‚Â */
+	/* V_Blank Out ï¿½ï¿½ï¿½èï¿½İ‚ï¿½Ò‚ï¿½ */
 	
 	INT_ChgMsk(INT_MSK_NULL,INT_MSK_VBLK_IN | INT_MSK_VBLK_OUT);
 	INT_SetScuFunc(INT_SCU_VBLK_OUT,CheckVblankEnd);
@@ -32,10 +33,10 @@ void SetVblank(void)
     
 	PER_Init(PER_KD_PERTIM,2,PER_ID_DGT,PER_SIZE_DGT,PadWorkArea,0);
 
-	/* V-BlankŠ„‚è‚İƒ‹[ƒ`ƒ“‚Ì“o˜^ */
+	/* V-Blankï¿½ï¿½ï¿½èï¿½İƒï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½Ì“oï¿½^ */
 	INT_ChgMsk(INT_MSK_NULL,INT_MSK_VBLK_IN | INT_MSK_VBLK_OUT);
 	INT_SetScuFunc(INT_SCU_VBLK_IN,UsrVblankStart);
-	INT_SetScuFunc(INT_SCU_VBLK_OUT,UsrVblankEnd);
+	INT_SetScuFunc(INT_SCU_VBLK_OUT,UsrVblankOut);
 	INT_ChgMsk(INT_MSK_VBLK_IN | INT_MSK_VBLK_OUT,INT_MSK_NULL);
 }
 

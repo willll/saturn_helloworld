@@ -27,6 +27,9 @@ set(SOURCES
   src/helloworld.c
   src/v_blank/v_blank.c
   src/v_blank/set_vb.c
+  src/smpclib/per_x1.c
+  src/smpclib/per_x2.c
+  src/smpclib/per_x3.src
   )
 
 set(CD_FILES
